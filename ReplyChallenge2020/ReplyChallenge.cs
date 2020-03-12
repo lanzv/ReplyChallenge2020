@@ -105,5 +105,34 @@ namespace ReplyChallenge2020
             //TODO: algorithm to get score
             return Scores.GetScoreOfSomething(this);
         }
+
+
+		public void GenerateOutputFile() 
+		{
+			StreamWriter sw = new StreamWriter(Program.OUTPUT_FILE);
+			
+			foreach(Developer dev in Developers)
+			{
+				if (!dev.IsUsed)
+					sw.WriteLine('X');
+				else
+				{
+					sw.Write(dev.X + ' ' + dev.Y);
+					sw.WriteLine();
+				}
+			}
+
+			foreach(var man in Managers)
+			{
+				if (!man.IsUsed)
+					sw.WriteLine('X');
+				else
+				{
+					sw.Write(man.X + ' ' + man.Y);
+					sw.WriteLine();
+				}
+			}
+
+		}
     }
 }
