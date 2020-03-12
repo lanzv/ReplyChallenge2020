@@ -30,7 +30,7 @@ namespace ReplyChallenge2020
             char field;
             bool legitchar;
             char[,] map = new char[width, height];
-            for (int h = height - 1; h >= 0; h--)
+            for (int h = 0; h < height; h++)
             {
                 for (int w = 0; w < width; w++)
                 {

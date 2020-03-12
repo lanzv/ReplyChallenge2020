@@ -20,9 +20,9 @@ namespace ReplyChallenge2020
 
 
         /// <summary>
-        /// [2,0] [2,1] [2,2] <br />
-        /// [1,0] [1,1] [2,1] <br />
         /// [0,0] [1,0] [2,0] <br />
+        /// [0,1] [1,1] [2,1] <br />
+        /// [0,2] [1,2] [2,2] <br />
         /// </summary>
         public char[,] Map { get; private set; }
 
