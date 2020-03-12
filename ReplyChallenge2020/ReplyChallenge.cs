@@ -92,127 +92,257 @@ namespace ReplyChallenge2020
         {
             //TODO: Some algorithm (bruteforce, apod ...) 
             MapOfPersons = new Person[H, W];
-            for(int i = 0; i < H; i--){
+            for(int i = 0; i < H; i++){
                 for(int j = 0; j < W; j++){
-                    if(Map[i,j] == "M")
+                    if(Map[i,j] == 'M')
                     {
-                        Manager m1;
-                        int score1;
-                        Manager m2;
-                        int score2;
+						//UPPER PERSON
+						Person p1 = null;
+						int score1 = 0;
+						//LEFTER PERSON
+						Person p2 = null;
+						int score2 = 0;
+
+						//UP
                         if(i != 0 && MapOfPersons[i - 1, j] != null)
                         {
+							//M&M
                             if(MapOfPersons[i - 1, j] is Manager)
                             {
-                                //TODO
-                            }
+								foreach(Person per in Managers)
+								{
+									if (!per.IsUsed)
+									{
+										int tmp_score = Scores.GetBonusPotential(per, MapOfPersons[i - 1, j]);
+
+										if (score1 < tmp_score)
+										{
+											score1 = tmp_score;
+											p1 = per;
+										}
+									}
+								}
+							}
                             else if(MapOfPersons[i - 1, j] is Developer)
                             {
-                                //TODO
-                            }
+								//M&D
+								foreach (Person per in Developers)
+								{
+									if (!per.IsUsed)
+									{
+										int tmp_score = Scores.GetBonusPotential(per, MapOfPersons[i - 1, j]);
+
+										if (score1 < tmp_score)
+										{
+											score1 = tmp_score;
+											p1 = per;
+										}
+									}
+								}
+							}
                         }
                         else
                         {
+							//UP is wall
+
+							score1 = -1;
+							/*
                             int k = 0;
                             while(Managers[k].IsUsed){
                                 k++;
                             }
-                            m1 = Managers[k];
+                            p1 = Managers[k];
+							*/
                         }
 
+						//LEFT
                         if(j != 0 && MapOfPersons[i, j - 1] != null)
                         {
-                            if(MapOfPersons[i - 1, j] is Manager)
+                            if(MapOfPersons[i, j - 1] is Manager)
                             {
-                               //TODO
-                            }
-                            else if(MapOfPersons[i - 1, j] is Developer)
+								//M&M
+								foreach (Person per in Managers)
+								{
+									if (!per.IsUsed)
+									{
+										int tmp_score = Scores.GetBonusPotential(per, MapOfPersons[i - 1, j]);
+
+										if (score2 < tmp_score)
+										{
+											score2 = tmp_score;
+											p2 = per;
+										}
+									}
+								}
+							}
+                            else if(MapOfPersons[i, j - 1] is Developer)
                             {
-                                //TODO
-                            }
+								//M&D
+								foreach (Person per in Managers)
+								{
+									if (!per.IsUsed)
+									{
+										int tmp_score = Scores.GetBonusPotential(per, MapOfPersons[i - 1, j]);
+
+										if (score2 < tmp_score)
+										{
+											score2 = tmp_score;
+											p2 = per;
+										}
+									}
+								}
+							}
                         }
                         else
                         {
+							//LEFT is Wall
+							score2 = -1;
+							/*
                             int k = 0;
                             while(Managers[k].IsUsed){
                                 k++;
                             }
                             m2 = Managers[k];
+							*/
                         }
 
                         
                         if(score1 > score2){
-                            MapOfPersons[i,j] = d1;
-                            d1.IsUsed = true;
-                            d1.X = i;
-                            d1.Y = j;
+							if (p1 == null) throw new Exception("p1 should not be null --- chyba je ve vypoèitavani score1");
+                            MapOfPersons[i,j] = p1;
+                            p1.IsUsed = true;
+                            p1.X = i;
+                            p1.Y = j;
                         }else{
-                            MapOfPersons[i,j] = d2;
-                            d2.IsUsed = true;
-                            d2.X = i;
-                            d2.Y = j;
+							if (p2 == null) throw new Exception("p2 should not be null --- chyba je ve vypoèitavani score1");
+							MapOfPersons[i,j] = p2;
+                            p2.IsUsed = true;
+                            p2.X = i;
+                            p2.Y = j;
                         }
                     }
-                    else if(Map[i,j] == "_")
+                    else if(Map[i,j] == '_')
                     {
-                        Developer d1;
-                        int score1;
-                        Developer d2;
-                        int score2;
+						Person p1 = null;
+						int score1 = 0;
+						Person p2 = null;
+						int score2 = 0;
 
 
                         if(i != 0 && MapOfPersons[i - 1, j] != null)
                         {
                             if(MapOfPersons[i - 1, j] is Manager)
                             {
-                                //TODO
-                            }
+								//D&M
+								foreach (Person per in Managers)
+								{
+									if (!per.IsUsed)
+									{
+										int tmp_score = Scores.GetBonusPotential(per, MapOfPersons[i - 1, j]);
+
+										if (score1 < tmp_score)
+										{
+											score1 = tmp_score;
+											p1 = per;
+										}
+									}
+								}
+							}
                             else if(MapOfPersons[i - 1, j] is Developer)
                             {
-                                //TODO
+                                //D&D
+								foreach(Person per in Developers)
+								{
+									if (!per.IsUsed)
+									{
+										int tmp_score = Scores.GetWorkPotential(per as Developer, MapOfPersons[i - 1, j] as Developer);
+
+										if (score1 < tmp_score)
+										{
+											score1 = tmp_score;
+											p1 = per;
+										}
+									}
+								}
                             }
                         }
                         else
                         {
+							//UP IS WALL
+							score1 = -1;
+							/*
                             int k = 0;
                             while(Developers[k].IsUsed){
                                 k++;
                             }
                             d1 = Developers[k];
+							*/
                         }
 
 
                         if(j != 0 && MapOfPersons[i, j - 1] != null)
                         {
-                            if(MapOfPersons[i - 1, j] is Manager)
+                            if(MapOfPersons[i, j - 1] is Manager)
                             {
-                                //TODO
-                            }
-                            else if(MapOfPersons[i - 1, j] is Developer)
+								//D&M
+								foreach (Person per in Managers)
+								{
+									if (!per.IsUsed)
+									{
+										int tmp_score = Scores.GetBonusPotential(per, MapOfPersons[i - 1, j]);
+
+										if (score2 < tmp_score)
+										{
+											score2 = tmp_score;
+											p2 = per;
+										}
+									}
+								}
+							}
+                            else if(MapOfPersons[i, j - 1] is Developer)
                             {
-                                //TODO
-                            }
+								//D&D
+								foreach (Person per in Developers)
+								{
+									if (!per.IsUsed)
+									{
+										int tmp_score = Scores.GetWorkPotential(per as Developer, MapOfPersons[i - 1, j] as Developer);
+
+										if (score2 < tmp_score)
+										{
+											score2 = tmp_score;
+											p2 = per;
+										}
+									}
+								}
+							}
                         }
                         else
                         {
+							//LEFT IS WALL
+							score2 = -1;
+							/*
                             int k = 0;
                             while(Developers[k].IsUsed){
                                 k++;
                             }
                             d2 = Developers[k];
+							*/
                         }
 
 
                         if(score1 > score2){
-                            MapOfPersons[i,j] = d1;
-                            d1.IsUsed = true;
-                            d1.X = i;
-                            d1.Y = j;
+							if (p1 == null) throw new Exception("p1 should not be null --- chyba je ve vypoèitavani score1");
+							MapOfPersons[i,j] = p1;
+                            p1.IsUsed = true;
+                            p1.X = i;
+                            p1.Y = j;
                         }else{
-                            MapOfPersons[i,j] = d2;
-                            d2.IsUsed = true;
-                            d2.X = i;
-                            d2.Y = j;
+							if (p1 == null) throw new Exception("p2 should not be null --- chyba je ve vypoèitavani score1");
+							MapOfPersons[i,j] = p2;
+                            p2.IsUsed = true;
+                            p2.X = i;
+                            p2.Y = j;
                         }
 
 
@@ -230,33 +360,32 @@ namespace ReplyChallenge2020
             return Scores.GetScoreOfSomething(this);
         }
 
-
-		public void GenerateOutputFile() 
+		public void GenerateOutputFile()
 		{
-			StreamWriter sw = new StreamWriter(Program.OUTPUT_FILE);
-			
-			foreach(Developer dev in Developers)
+			using (StreamWriter sw = new StreamWriter(Program.OUTPUT_FILE))
 			{
-				if (!dev.IsUsed)
-					sw.WriteLine('X');
-				else
+				foreach (Developer dev in Developers)
 				{
-					sw.Write(dev.X + ' ' + dev.Y);
-					sw.WriteLine();
+					if (!dev.IsUsed)
+						sw.WriteLine("X");
+					else
+					{
+						sw.Write(dev.X + " " + dev.Y);
+						sw.WriteLine();
+					}
+				}
+
+				foreach (var man in Managers)
+				{
+					if (!man.IsUsed)
+						sw.WriteLine("X");
+					else
+					{
+						sw.Write(man.X + " " + man.Y);
+						sw.WriteLine();
+					}
 				}
 			}
-
-			foreach(var man in Managers)
-			{
-				if (!man.IsUsed)
-					sw.WriteLine('X');
-				else
-				{
-					sw.Write(man.X + ' ' + man.Y);
-					sw.WriteLine();
-				}
-			}
-
 		}
     }
 }
