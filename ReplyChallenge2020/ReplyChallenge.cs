@@ -28,6 +28,7 @@ namespace ReplyChallenge2020
         public int NumberOfManagers { get; private set; }
 
 
+        // MOZNA JE DOBRY NAPAD MISTO LISTU DAT DALSI DICTIONARY NEBO TAK NECO 
         public Dictionary<string, List<Developer>> Skills { get; private set; }
         public Dictionary<string, List<Person>> Companies { get; private set; }
 
@@ -74,9 +75,6 @@ namespace ReplyChallenge2020
             Printer.PrintNumber(writer, someInt);
             Printer.PrintNumbers(writer, someIntData);
         }
-
-
-
 
 
 
