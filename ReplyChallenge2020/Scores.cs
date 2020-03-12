@@ -13,6 +13,10 @@ namespace ReplyChallenge2020
 
         public static int GetTotalPotential(Person per1, Person per2)
         {
+            if (per1 == null || per2 == null)
+                // JSI NULL? TAK JDI DO PICE
+                return 0;
+
             if (per1 is Developer dev1 && per2 is Developer dev2)
                 return GetBonusPotential(dev1, dev2) + GetWorkPotential(dev1, dev2);
 
@@ -21,6 +25,10 @@ namespace ReplyChallenge2020
 
         public static int GetBonusPotential(Person per1, Person per2)
         {
+            if (per1 == null || per2 == null)
+                // JSI NULL? TAK JDI DO PICE
+                return 0;
+
             if (per1.Company == per2.Company)
                 return per1.Bonus * per2.Bonus;
 
@@ -29,6 +37,10 @@ namespace ReplyChallenge2020
 
         public static int GetWorkPotential(Developer dev1, Developer dev2)
         {
+            if (dev1 == null || dev2 == null)
+                // JSI NULL? TAK JDI DO PICE
+                return 0;
+
             HashSet<string> allSkills = new HashSet<string>();
             HashSet<string> commonSkills = new HashSet<string>();
 
