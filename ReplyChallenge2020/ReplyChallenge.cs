@@ -73,6 +73,8 @@ namespace ReplyChallenge2020
             Map = Loader.GetMap(reader, W, H);
             Developers = Loader.GetDevelopers(reader);
             Managers = Loader.GetManagers(reader);
+            Companies = Loader.GetCompanies(Developers, Managers);
+            Skills = Loader.GetSkills(Developers);
         }
 
 
@@ -389,42 +391,132 @@ namespace ReplyChallenge2020
 
         public void EZRun()
         {
-            //"EZ" algorithm
-            for (int i = 0; i < H; i++)
-            {
-                for (int j = 0; j < W; j++)
-                {
-                    if (Map[j, i] == 'M')
-                    {
-                        int k = 0;
-                        while (k < Managers.Length && Managers[k].IsUsed)
-                        {
-                            k++;
-                        }
-                        if (k < Managers.Length)
-                        {
-                            Managers[k].IsUsed = true;
-                            Managers[k].X = i;
-                            Managers[k].Y = j;
-                        }
-                    }
-                    else if (Map[j, i] == '_')
-                    {
+            MapOfPersons = new Person[W, H];
 
-                        int k = 0;
-                        while (k < Developers.Length && Developers[k].IsUsed)
-                        {
-                            k++;
-                        }
-                        if (k < Developers.Length)
-                        {
-                            Developers[k].IsUsed = true;
-                            Developers[k].X = i;
-                            Developers[k].Y = j;
-                        }
+            //"EZ" algorithm
+            for (int height = 0; height < H; height++)
+            {
+                for (int width = 0; width < W; width++)
+                {
+                    switch (Map[width, height])
+                    {
+                        case 'M':
+                            Manager chosen = EzRun_FindDev_highestBonus();
+
+                            if (width - 1 >= 0 && height >= 0)
+                            {
+                                if (MapOfPersons[width - 1, height] != null)
+                                {
+                                    foreach (var mang in Companies[MapOfPersons[width - 1, height].Company])
+                                    {
+                                        if (!mang.IsUsed && mang is Manager)
+                                            chosen = (Manager)mang;
+                                    }
+                                }
+                            }
+
+                            if (width >= 0 && height - 1 >= 0)
+                            {
+                                if (MapOfPersons[width, height - 1] != null)
+                                {
+                                    foreach (var mang in Companies[MapOfPersons[width, height - 1].Company])
+                                    {
+                                        if (!mang.IsUsed && mang is Manager)
+                                            chosen = (Manager)mang;
+                                    }
+                                }
+                            }
+
+                            if (!chosen.IsUsed)
+                            {
+                                chosen.IsUsed = true;
+                                chosen.X = height;
+                                chosen.Y = width;
+                            }
+                            break;
+
+                        case '_':
+                            Developer chosenDev = EzRun_FindDev_highestNumOfSkills();
+
+                            if (width - 1 >= 0 && height >= 0)
+                            {
+                                if (MapOfPersons[width - 1, height] != null)
+                                {
+                                    foreach (var mang in Companies[MapOfPersons[width - 1, height].Company])
+                                    {
+                                        if (!mang.IsUsed && mang is Developer)
+                                            chosenDev = (Developer)mang;
+                                    }
+                                }
+                            }
+
+                            if (width >= 0 && height - 1 >= 0)
+                            {
+                                if (MapOfPersons[width, height - 1] != null)
+                                {
+                                    foreach (var mang in Companies[MapOfPersons[width, height - 1].Company])
+                                    {
+                                        if (!mang.IsUsed && mang is Developer)
+                                            chosenDev = (Developer)mang;
+                                    }
+                                }
+                            }
+
+                            if (!chosenDev.IsUsed)
+                            {
+                                chosenDev.IsUsed = true;
+                                chosenDev.X = height;
+                                chosenDev.Y = width;
+                            }
+
+                            break;
+
                     }
                 }
             }
+        }
+
+        public Developer EzRun_FindDev_highestNumOfSkills()
+        {
+            Developer chosen = Developers[0];
+
+            if (chosen.IsUsed)
+                for (int i = 1; i < Developers.Length; i++)
+                {
+                    if (!Developers[i].IsUsed)
+                        chosen = Developers[i];
+                }
+
+            int best = 0;
+            foreach (var dev in Developers)
+            {
+                if (dev.NumberOfSkills > best)
+                    chosen = dev;
+            }
+
+
+            return chosen;
+        }
+
+        public Manager EzRun_FindDev_highestBonus()
+        {
+            Manager chosen = Managers[0];
+
+            if (chosen.IsUsed)
+                for (int i = 1; i < Managers.Length; i++)
+                {
+                    if (!Managers[i].IsUsed)
+                        chosen = Managers[i];
+                }
+
+            int best = 0;
+            foreach (var man in Managers)
+            {
+                if (man.Bonus > best)
+                    chosen = man;
+            }
+
+            return chosen;
         }
     }
 }

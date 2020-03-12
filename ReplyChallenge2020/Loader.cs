@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 
 namespace ReplyChallenge2020
@@ -110,6 +111,47 @@ namespace ReplyChallenge2020
             }
 
             return managers;
+        }
+
+        public static Dictionary<string, List<Person>> GetCompanies(Developer[] devs, Manager[] mags)
+        {
+            var returnVal = new Dictionary<string, List<Person>>();
+
+            foreach (var dev in devs)
+            {
+                if (returnVal.ContainsKey(dev.Company))
+                {
+                    returnVal[dev.Company].Add(dev);
+                }
+                else
+                {
+                    returnVal.Add(dev.Company, new List<Person> { dev });
+                }
+            }
+
+            return returnVal;
+        }
+
+        public static Dictionary<string, List<Developer>> GetSkills(Developer[] devs)
+        {
+            var returnVal = new Dictionary<string, List<Developer>>();
+
+            foreach (var dev in devs)
+            {
+                foreach (var skill in dev.Skills)
+                {
+                    if (returnVal.ContainsKey(skill))
+                    {
+                        returnVal[skill].Add(dev);
+                    }
+                    else
+                    {
+                        returnVal.Add(skill, new List<Developer> {dev});
+                    }
+                }
+            }
+
+            return returnVal;
         }
     }
 }
