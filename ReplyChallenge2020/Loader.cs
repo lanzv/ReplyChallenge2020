@@ -62,5 +62,54 @@ namespace ReplyChallenge2020
 
             return map;
         }
+
+        public static Developer[] GetDevelopers(Reader reader)
+        {
+
+            reader.Int(out int numberOfDevelopers);
+            Developer[] devs = new Developer[numberOfDevelopers];
+
+            string company;
+            int bonus;
+            int numberOfSkills;
+            string[] skills;
+
+            for (int i = 0; i < numberOfDevelopers; i++)
+            {
+                company = reader.Word();
+                reader.Int(out bonus);
+                reader.Int(out numberOfSkills);
+
+                skills = new string[numberOfSkills];
+
+                for (int j = 0; j < numberOfSkills; j++)
+                {
+                    skills[j] = reader.Word();
+                }
+
+                devs[i] = new Developer(company, bonus, numberOfSkills, skills);
+            }
+
+
+            return devs;
+        }
+
+        public static Manager[] GetManagers(Reader reader)
+        {
+            reader.Int(out int numOfManagers);
+            Manager[] managers = new Manager[numOfManagers];
+            string company;
+            int bonus;
+
+            for (int i = 0; i < numOfManagers; i++)
+            {
+                company = reader.Word();
+                reader.Int(out bonus);
+
+                managers[i] = new Manager(company, bonus);
+            }
+
+            return managers;
+        }
     }
 }
