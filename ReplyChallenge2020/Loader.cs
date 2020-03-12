@@ -28,28 +28,39 @@ namespace ReplyChallenge2020
         public static char[,] GetMap(Reader reader, int width, int height)
         {
             char field;
-            char[,] map = new char[width,height];
-            for (int h = height - 1; h > 0; h--)
+            bool legitchar;
+            char[,] map = new char[width, height];
+            for (int h = height - 1; h >= 0; h--)
             {
                 for (int w = 0; w < width; w++)
                 {
-                    reader.Char(out field);
-                    switch (field)
+                    legitchar = false;
+                    while (!legitchar)
                     {
-                        case '#':
-                        case '_':
-                        case 'M':
-                            map[w, h] = field;
-                            break;
-                        default:
-                            Console.WriteLine("Dusa je frajer, press enter");
-                            Console.ReadLine();
-                            break;
+                        reader.Char(out field);
+                        switch (field)
+                        {
+                            case '#':
+                            case '_':
+                            case 'M':
+                                map[w, h] = field;
+                                legitchar = true;
+                                break;
+                            case '\r':
+                            case '\n':
+                                reader.Char(out field);
+                                legitchar = false;
+                                break;
+                            default:
+                                Console.WriteLine("Dusa je kokot, press enter");
+                                Console.ReadLine();
+                                break;
+                        }
                     }
                 }
             }
 
-            return null;
+            return map;
         }
     }
 }
