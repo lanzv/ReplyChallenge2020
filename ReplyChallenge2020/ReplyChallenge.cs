@@ -15,6 +15,11 @@ namespace ReplyChallenge2020
 
 
         //TODO: Add data corresponding to input
+        public int W { get; private set; }
+        public int H { get; private set; }
+
+        public char[,] Map
+
         public int someInt { get; private set; }
         public int[] someIntData { get; private set; }
         public string[] someStringData { get; private set; }
