@@ -12,6 +12,7 @@ namespace ReplyChallenge2020
             ReplyChallenge RC = new ReplyChallenge();
 
             RC.Run();
+            RC.GenerateOutputFile();
         }
     }
 }

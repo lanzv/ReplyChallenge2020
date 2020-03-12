@@ -203,7 +203,7 @@ namespace ReplyChallenge2020
 
                         if (score1 > score2)
                         {
-                            if (p1 == null) throw new Exception("p1 should not be null --- chyba je ve vypoèitavani score1");
+                            if (p1 == null) continue;
                             MapOfPersons[j, i] = p1;
                             p1.IsUsed = true;
                             p1.X = j;
@@ -211,7 +211,7 @@ namespace ReplyChallenge2020
                         }
                         else
                         {
-                            if (p2 == null) throw new Exception("p2 should not be null --- chyba je ve vypoèitavani score1");
+                            if (p2 == null) continue;
                             MapOfPersons[j, i] = p2;
                             p2.IsUsed = true;
                             p2.X = j;
@@ -330,7 +330,7 @@ namespace ReplyChallenge2020
 
                         if (score1 > score2)
                         {
-                            if (p1 == null) throw new Exception("p1 should not be null --- chyba je ve vypoèitavani score1");
+                            if (p1 == null) continue;
                             MapOfPersons[j, i] = p1;
                             p1.IsUsed = true;
                             p1.X = j;
@@ -338,7 +338,7 @@ namespace ReplyChallenge2020
                         }
                         else
                         {
-                            if (p1 == null) throw new Exception("p2 should not be null --- chyba je ve vypoèitavani score1");
+                            if (p1 == null) continue;
                             MapOfPersons[j, i] = p2;
                             p2.IsUsed = true;
                             p2.X = j;
