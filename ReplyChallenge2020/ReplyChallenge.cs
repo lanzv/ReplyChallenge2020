@@ -87,8 +87,6 @@ namespace ReplyChallenge2020
 
 
 
-
-
         //Run algorithm to prepare output data
         public void Run()
         {
