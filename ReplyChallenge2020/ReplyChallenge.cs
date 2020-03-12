@@ -20,9 +20,9 @@ namespace ReplyChallenge2020
 
 
         /// <summary>
-        /// [2,0] [2,1] [2,2] <br />
-        /// [1,0] [1,1] [2,1] <br />
         /// [0,0] [1,0] [2,0] <br />
+        /// [0,1] [1,1] [2,1] <br />
+        /// [0,2] [1,2] [2,2] <br />
         /// </summary>
         public char[,] Map { get; private set; }
 
@@ -70,7 +70,7 @@ namespace ReplyChallenge2020
         {
             W = Loader.GetNumber(reader);
             H = Loader.GetNumber(reader);
-
+            
             //TODO Pracuju na tom, dusa, zatim vraci null
             Map = Loader.GetMap(reader, W, H);
         }
@@ -231,5 +231,34 @@ namespace ReplyChallenge2020
             //TODO: algorithm to get score
             return Scores.GetScoreOfSomething(this);
         }
+
+
+		public void GenerateOutputFile() 
+		{
+			StreamWriter sw = new StreamWriter(Program.OUTPUT_FILE);
+			
+			foreach(Developer dev in Developers)
+			{
+				if (!dev.IsUsed)
+					sw.WriteLine('X');
+				else
+				{
+					sw.Write(dev.X + ' ' + dev.Y);
+					sw.WriteLine();
+				}
+			}
+
+			foreach(var man in Managers)
+			{
+				if (!man.IsUsed)
+					sw.WriteLine('X');
+				else
+				{
+					sw.Write(man.X + ' ' + man.Y);
+					sw.WriteLine();
+				}
+			}
+
+		}
     }
 }
