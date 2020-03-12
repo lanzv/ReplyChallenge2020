@@ -42,7 +42,7 @@ namespace ReplyChallenge2020
                             map[w, h] = field;
                             break;
                         default:
-                            Console.WriteLine("Dusa je kokot, press enter");
+                            Console.WriteLine("Dusa je frajer, press enter");
                             Console.ReadLine();
                             break;
                     }
