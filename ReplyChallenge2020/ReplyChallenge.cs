@@ -362,33 +362,32 @@ namespace ReplyChallenge2020
             return Scores.GetScoreOfSomething(this);
         }
 
-
-		public void GenerateOutputFile() 
+		public void GenerateOutputFile()
 		{
-			StreamWriter sw = new StreamWriter(Program.OUTPUT_FILE);
-			
-			foreach(Developer dev in Developers)
+			using (StreamWriter sw = new StreamWriter(Program.OUTPUT_FILE))
 			{
-				if (!dev.IsUsed)
-					sw.WriteLine('X');
-				else
+				foreach (Developer dev in Developers)
 				{
-					sw.Write(dev.X + ' ' + dev.Y);
-					sw.WriteLine();
+					if (!dev.IsUsed)
+						sw.WriteLine("X");
+					else
+					{
+						sw.Write(dev.X + " " + dev.Y);
+						sw.WriteLine();
+					}
+				}
+
+				foreach (var man in Managers)
+				{
+					if (!man.IsUsed)
+						sw.WriteLine("X");
+					else
+					{
+						sw.Write(man.X + " " + man.Y);
+						sw.WriteLine();
+					}
 				}
 			}
-
-			foreach(var man in Managers)
-			{
-				if (!man.IsUsed)
-					sw.WriteLine('X');
-				else
-				{
-					sw.Write(man.X + ' ' + man.Y);
-					sw.WriteLine();
-				}
-			}
-
 		}
     }
 }
