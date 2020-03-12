@@ -24,6 +24,10 @@ namespace ReplyChallenge2020
             return n;
         }
 
+        public static char[,] GetMap(Reader reader)
+        {
 
+            return null;
+        }
     }
 }
