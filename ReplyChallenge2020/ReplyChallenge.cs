@@ -19,7 +19,11 @@ namespace ReplyChallenge2020
         public int H { get; private set; }
 
 
-
+        /// <summary>
+        /// [2,0] [2,1] [2,2] <br />
+        /// [1,0] [1,1] [2,1] <br />
+        /// [0,0] [1,0] [2,0] <br />
+        /// </summary>
         public char[,] Map { get; private set; }
 
 
@@ -61,8 +65,11 @@ namespace ReplyChallenge2020
         //Load data from input file
         private void LoadData()
         {
+            W = Loader.GetNumber(reader);
+            H = Loader.GetNumber(reader);
+
             //TODO Pracuju na tom, dusa, zatim vraci null
-            Map = Loader.GetMap(reader);
+            Map = Loader.GetMap(reader, W, H);
         }
 
 
