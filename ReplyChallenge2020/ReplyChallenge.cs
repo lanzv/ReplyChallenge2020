@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -15,12 +15,29 @@ namespace ReplyChallenge2020
 
 
         //TODO: Add data corresponding to input
-        public int someInt { get; private set; }
-        public int[] someIntData { get; private set; }
-        public string[] someStringData { get; private set; }
+        public int W { get; private set; }
+        public int H { get; private set; }
 
-        //TODO: Add data corresponding to output ... optional
-        public int[] someIntOutputData { get; private set; }
+
+
+        public char[,] Map { get; private set; }
+
+
+
+        public int NumberOfDevelopers { get; private set; }
+        public int NumberOfManagers { get; private set; }
+
+
+        public Dictionary<string, List<Developer>> Skills { get; private set; }
+        public Dictionary<string, List<Person>> Companies { get; private set; }
+
+
+        public Developer[] Developers { get; private set; }
+        public Manager[] Managers { get; private set; }
+
+
+
+
 
 
 

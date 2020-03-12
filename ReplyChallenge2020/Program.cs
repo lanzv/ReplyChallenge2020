@@ -8,8 +8,7 @@ namespace ReplyChallenge2020
         public static readonly string OUTPUT_FILE = "output_1.txt";
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-
+            Console.WriteLine("Hello World!"); 
 
             ReplyChallenge RC = new ReplyChallenge();
             RC.Run();

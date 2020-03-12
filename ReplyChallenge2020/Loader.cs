@@ -16,11 +16,14 @@ namespace ReplyChallenge2020
             }
             return numbers;
         }
+
         public static int GetNumber(Reader reader)
         {
             int n;
             reader.Int(out n);
             return n;
         }
+
+
     }
 }
