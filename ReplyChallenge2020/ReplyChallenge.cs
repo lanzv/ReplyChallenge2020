@@ -62,9 +62,8 @@ namespace ReplyChallenge2020
         //Load data from input file
         private void LoadData()
         {
-            //TODO: Load data corresponding to input file
-            someInt = Loader.GetNumber(reader);
-            someIntData = Loader.GetNNumbers(reader, someInt);
+            //TODO Pracuju na tom, dusa, zatim vraci null
+            Map = Loader.GetMap(reader);
         }
 
 
@@ -72,8 +71,7 @@ namespace ReplyChallenge2020
         public void PrintSomething(object something)
         {
             //TODO: Print "Something" data
-            Printer.PrintNumber(writer, someInt);
-            Printer.PrintNumbers(writer, someIntData);
+
         }
 
 
