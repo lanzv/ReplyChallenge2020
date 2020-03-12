@@ -9,6 +9,8 @@ namespace ReplyChallenge2020
         public int Bonus { get; }
         public string Company { get; }
         public bool IsUsed {get; set;}
+        public int X;
+        public int Y;
 
         public Person(string company, int bonus)
         {
