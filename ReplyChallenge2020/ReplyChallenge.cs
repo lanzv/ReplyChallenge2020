@@ -68,9 +68,9 @@ namespace ReplyChallenge2020
         {
             W = Loader.GetNumber(reader);
             H = Loader.GetNumber(reader);
-            
-            //TODO Pracuju na tom, dusa, zatim vraci null
             Map = Loader.GetMap(reader, W, H);
+            Developers = Loader.GetDevelopers(reader);
+            Managers = Loader.GetManagers(reader);
         }
 
 
