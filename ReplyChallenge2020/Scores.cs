@@ -7,8 +7,8 @@ namespace ReplyChallenge2020
     class Scores
     {
         // PLAN
-            // nahore person - vyberu per z company 
-            // nahore developer - vyberu developera podle WP 
+            // nahore/vlevo person - vyberu per z company 
+            // nahore/vlevo developer - vyberu developera podle WP 
 
 
         public static int GetTotalPotential(Person per1, Person per2)
