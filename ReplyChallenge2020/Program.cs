@@ -11,8 +11,6 @@ namespace ReplyChallenge2020
         {
             ReplyChallenge RC = new ReplyChallenge();
 
-            Reader reader = new Reader(INPUT_FILE);
-
             RC.Run();
         }
     }
